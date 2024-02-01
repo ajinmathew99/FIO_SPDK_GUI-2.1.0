@@ -23,11 +23,11 @@ cd spdk
 git submodule update --init
 ```
 
-Then, run the SPDK configure script to enable fio (point it to the root of the fio repository):
+**Then, run the SPDK configure script to enable fio (point it to the root of the fio repository):**
 
 ```
 cd spdk
-./configure --with-fio=/path/to/fio/repo < *other configuration options* >
+./configure --with-fio=/path/to/fio/repo <other configuration options>
 ```
 
 **Finally, build SPDK:**
@@ -38,7 +38,7 @@ make
 
 **Note to advanced users:**
 
- These steps assume you're using the DPDK submodule. If you are using your own version of DPDK, the fio plugin requires that DPDK be compiled with -fPIC. You can compile DPDK with -fPIC by modifying your DPDK configuration file and adding the line:
+ These steps assume you're using the DPDK submodule. If you are using your own version of DPDK, the fio plugin requires that DPDK be compiled with `-fPIC`. You can compile DPDK with `-fPIC` by modifying your DPDK configuration file and adding the line:
 
 ```
 EXTRA_CFLAGS=-fPIC
@@ -46,27 +46,27 @@ EXTRA_CFLAGS=-fPIC
 
 ## Running fio with SPDK
 
-To use the SPDK fio plugin with fio, specify the plugin binary using 'LD_PRELOAD' when running fio and set 'ioengine=spdk' in the fio configuration file (see example_config.fio in the same directory as this README).
+To use the SPDK fio plugin with fio, specify the plugin binary using `LD_PRELOAD` when running fio and set `ioengine=spdk` in the fio configuration file (see example_config.fio in the same directory as this README).
 
 ```
 LD_PRELOAD=<path to spdk repo>/examples/bdev/fio_plugin/fio_plugin fio
 ```
 
-The fio configuration file must contain one new parameter:
+**The fio configuration file must contain one new parameter:**
 
 ```
 spdk_conf=./examples/bdev/fio_plugin/bdev.conf
 ```
 
-This must point at an SPDK configuration file. There are a number of example configuration files in the SPDK repository under 'etc/spdk'.
+This must point at an SPDK configuration file. There are a number of example configuration files in the SPDK repository under `etc/spdk`.
 
-**You can specify which block device to run against by setting the filename parameter to the block device name:**
+You can specify which block device to run against by setting the filename parameter to the block device name:
 
 ```
 filename=Malloc0
 ```
 
-**Or for NVMe devices:**
+Or for NVMe devices:
 
 ```
 filename=Nvme0n1
