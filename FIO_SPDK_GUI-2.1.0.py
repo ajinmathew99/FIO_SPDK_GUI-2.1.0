@@ -107,4 +107,99 @@ def run_fio_command_on_remote():
     except subprocess.CalledProcessError as e:
         progress_bar.stop()
         result_label.config(text=f"Error occurred during fio execution: {e}", fg="red")
+
+
+# Create the main window
+root = tk.Tk()
+root.title("FIO_SPDK-2.1.0")
+
+window_width = 600
+window_height = 400
+root.geometry(f"{window_width}x{window_height}")
+root.resizable(False, False)
+root.withdraw()  # Hide the main window initially
+
+# Styling
+font_style = ("Arial", 12)
+label_color = "#333333"
+entry_color = "#666666"
+button_color = "#009900"
+
+# Add padding between walls and lines
+label_pad_y = 10
+entry_pad_y = 5
+button_pad_y = 20
+left_padding = 40
+top_padding = 40
+
+# Create the login frame
+login_window = tk.Tk()
+login_window.title("Login")
+
+login_window_width = 450
+login_window_height = 350
+login_window.geometry(f"{login_window_width}x{login_window_height}")
+login_window.resizable(False, False)
+
+ssh_host_label = tk.Label(login_window, text="SSH Host:", font=font_style, fg=label_color, anchor='w')
+ssh_host_label.grid(row=0, column=0, pady=(top_padding, label_pad_y), padx=left_padding, sticky='w')
+ssh_host_entry = tk.Entry(login_window, font=font_style, fg=entry_color)
+ssh_host_entry.grid(row=0, column=1, pady=(top_padding, entry_pad_y), padx=5, sticky='w')
+
+ssh_username_label = tk.Label(login_window, text="Username:", font=font_style, fg=label_color, anchor='w')
+ssh_username_label.grid(row=1, column=0, pady=(top_padding, label_pad_y), padx=left_padding, sticky='w')
+ssh_username_entry = tk.Entry(login_window, font=font_style, fg=entry_color)
+ssh_username_entry.grid(row=1, column=1, pady=(top_padding, entry_pad_y), padx=5, sticky='w')
+
+ssh_password_label = tk.Label(login_window, text="Password:", font=font_style, fg=label_color, anchor='w')
+ssh_password_label.grid(row=2, column=0, pady=(top_padding, label_pad_y), padx=left_padding, sticky='w')
+ssh_password_entry = tk.Entry(login_window, font=font_style, fg=entry_color, show="*")  # Show asterisks for password
+ssh_password_entry.grid(row=2, column=1, pady=(top_padding, entry_pad_y), padx=5, sticky='w')
+
+login_button = tk.Button(login_window, text="Login", font=font_style, bg=button_color, command=connect_to_server)
+login_button.grid(row=3, column=1, pady=(top_padding, entry_pad_y), padx=5, sticky='w')
+
+spdkpath_label = tk.Label(root, text="Path to SPDK", font=font_style, fg=label_color, anchor='w')
+spdkpath_label.grid(row=0, column=0, pady=(top_padding, label_pad_y), padx=left_padding, sticky='w')
+spdkpath_entry = tk.Entry(root, font=font_style, fg=entry_color)
+spdkpath_entry.grid(row=0, column=1, pady=(top_padding, entry_pad_y), padx=5, sticky='w')
+
+traddr0_label = tk.Label(root, text="PCI address of Disk", font=font_style, fg=label_color, anchor='w')
+traddr0_label.grid(row=1, column=0, pady=label_pad_y, padx=left_padding, sticky='w')
+traddr0_entry = tk.Entry(root, font=font_style, fg=entry_color)
+traddr0_entry.grid(row=1, column=1, pady=entry_pad_y, padx=5, sticky='w')
+
+size_label = tk.Label(root, text="Size", font=font_style, fg=label_color, anchor='w')
+size_label.grid(row=2, column=0, pady=label_pad_y, padx=left_padding, sticky='w')
+size_entry = tk.Entry(root, font=font_style, fg=entry_color)
+size_entry.grid(row=2, column=1, pady=entry_pad_y, padx=5, sticky='w')
+
+rw_options = ["read", "write", "randread", "randwrite"]
+
+rw_label = tk.Label(root, text="Specify Read/Write command", font=font_style, fg=label_color, anchor='w')
+rw_label.grid(row=3, column=0, pady=label_pad_y, padx=left_padding, sticky='w')
+
+rw_combobox = Combobox(root, values=rw_options, font=font_style, state="readonly")
+rw_combobox.grid(row=3, column=1, pady=entry_pad_y, padx=5, sticky='w')
+rw_combobox.set(rw_options[0])
+
+bs_label = tk.Label(root, text="Block size", font=font_style, fg=label_color, anchor='w')
+bs_label.grid(row=5, column=0, pady=label_pad_y, padx=left_padding, sticky='w')
+bs_entry = tk.Entry(root, font=font_style, fg=entry_color)
+bs_entry.grid(row=5, column=1, pady=entry_pad_y, padx=5, sticky='w')
+
+iodepth_label = tk.Label(root, text="IO depth", font=font_style, fg=label_color, anchor='w')
+iodepth_label.grid(row=6, column=0, pady=label_pad_y, padx=left_padding, sticky='w')
+iodepth_entry = tk.Entry(root, font=font_style, fg=entry_color)
+iodepth_entry.grid(row=6, column=1, pady=entry_pad_y, padx=5, sticky='w')
+
+run_button = tk.Button(root, text="Run FIO", font=font_style, bg=button_color, command=run_fio_command_on_remote)
+run_button.grid(row=7, column=0, columnspan=2, pady=button_pad_y)
+
+result_label = tk.Label(root, text="", font=font_style, fg="black")
+result_label.grid(row=8, column=0, columnspan=2, pady=label_pad_y)
+
+login_window.mainloop()
+root.mainloop()
+
         
