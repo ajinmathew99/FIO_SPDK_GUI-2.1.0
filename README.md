@@ -39,8 +39,9 @@ If you encounter any issues, please check the following:
 - You can manually bind the SPDK NVMe driver with the NVMe drives by doing the following:
   - Go to the SPDK directory via terminal.
   - Run the following command:
-  ```
-`sudo ./spdk/scripts/setup.sh`
+  
+```
+sudo ./spdk/scripts/setup.sh
 ```
 
 ## Contributing
