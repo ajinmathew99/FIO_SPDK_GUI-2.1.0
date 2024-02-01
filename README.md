@@ -12,7 +12,10 @@ Revised GUI for Performing FIO Benchmarking using SPDK as IO Engine in a Remote 
 - Python 3.6 or later
 - SSH client
 - SPDK installed with FIO on the remote server
-  - You can refer to the following link for installing SPDK with FIO: 
+  - You can refer to the following link for installing SPDK with FIO:
+```
+https://github.com/ajin412/FIO_SPDK_GUI-2.1.0/blob/main/SPDK_Installation.md
+``` 
 
 - SPDK NVMe driver binded with all the NVMe drives that we need to benchmark on the remote server.
 
@@ -36,7 +39,9 @@ If you encounter any issues, please check the following:
 - You can manually bind the SPDK NVMe driver with the NVMe drives by doing the following:
   - Go to the SPDK directory via terminal.
   - Run the following command:
+  ```
 `sudo ./spdk/scripts/setup.sh`
+```
 
 ## Contributing
 If you would like to contribute to this project, please fork the repository and submit a pull request.
