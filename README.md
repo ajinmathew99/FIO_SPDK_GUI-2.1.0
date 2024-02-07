@@ -41,7 +41,7 @@ If you encounter any issues, please check the following:
   - Run the following command:
   
 ```
-sudo ./spdk/scripts/setup.sh
+sudo ./scripts/setup.sh
 ```
 
 ## Contributing
